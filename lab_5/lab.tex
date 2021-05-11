@@ -1,0 +1,704 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Lab 5},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Lab 5}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(magrittr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'magrittr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'readr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stringr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'stringr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rvest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rvest' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rvest'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:readr':
+## 
+##     guess_encoding
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(httr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'httr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tm' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: NLP
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'NLP'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:httr':
+## 
+##     content
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(wordcloud)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'wordcloud' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: RColorBrewer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidyverse' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.0     v forcats 0.5.1
+## v tidyr   1.1.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tibble' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'purrr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'forcats' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x ggplot2::annotate()     masks NLP::annotate()
+## x NLP::content()          masks httr::content()
+## x tidyr::extract()        masks magrittr::extract()
+## x dplyr::filter()         masks stats::filter()
+## x rvest::guess_encoding() masks readr::guess_encoding()
+## x dplyr::lag()            masks stats::lag()
+## x purrr::set_names()      masks magrittr::set_names()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidytext)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidytext' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(syuzhet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'syuzhet' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(glmnet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'glmnet' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'Matrix'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
+\end{verbatim}
+
+\begin{verbatim}
+## Loaded glmnet 4.1-1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(topicmodels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'topicmodels' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"C:/Users/User/OneDrive/Desktop/Spring 2021/OIDD 245/lab_5"}\NormalTok{)}
+\NormalTok{reviews<-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"electronics_downsample.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Missing column names filled in: 'X1' [1]
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   X1 = col_double(),
+##   asin = col_character(),
+##   helpful = col_character(),
+##   overall = col_double(),
+##   reviewText = col_character(),
+##   reviewTime = col_character(),
+##   reviewerID = col_character(),
+##   reviewerName = col_character(),
+##   summary = col_character(),
+##   unixReviewTime = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rows =}\StringTok{ }\KeywordTok{str_detect}\NormalTok{(reviews}\OperatorTok{$}\NormalTok{reviewText, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b(sd|SD)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{b"}\NormalTok{)}
+
+\NormalTok{reviews[rows,] }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{group_by}\NormalTok{(asin) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{tally}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{arrange}\NormalTok{(}\KeywordTok{desc}\NormalTok{(n)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{data.frame}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{   }\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         asin   n
+## 1 B007WTAJTO 576
+## 2 B002WE6D44 214
+## 3 B000VX6XL6 192
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top3 =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"B007WTAJTO"}\NormalTok{, }\StringTok{"B002WE6D44"}\NormalTok{, }\StringTok{"B000VX6XL6"}\NormalTok{)}
+\NormalTok{name3 =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Sandisk"}\NormalTok{, }\StringTok{"Transcend"}\NormalTok{, }\StringTok{"Kingston"}\NormalTok{)}
+\NormalTok{top3frame =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\DataTypeTok{asin =}\NormalTok{ top3, }\DataTypeTok{product =}\NormalTok{name3)}
+\NormalTok{top3frame}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      asin         product    
+## [1,] "B007WTAJTO" "Sandisk"  
+## [2,] "B002WE6D44" "Transcend"
+## [3,] "B000VX6XL6" "Kingston"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#print("The products are Sandisk, Transcend and Kingston")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{averagestars =}\StringTok{ }\KeywordTok{filter}\NormalTok{(reviews, reviews}\OperatorTok{$}\NormalTok{asin }\OperatorTok{%in%}\StringTok{ }\NormalTok{top3)}
+\NormalTok{averagestars1 =}\StringTok{ }\KeywordTok{merge}\NormalTok{(averagestars, top3frame, }\DataTypeTok{by=}\StringTok{"asin"}\NormalTok{, }\DataTypeTok{all.x=}\OtherTok{TRUE}\NormalTok{ )}
+\NormalTok{averagestars2 =}\StringTok{ }\KeywordTok{group_by}\NormalTok{(averagestars1, product) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarize}\NormalTok{(}\KeywordTok{mean}\NormalTok{(overall))}
+\NormalTok{averagestars2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   product   `mean(overall)`
+##   <chr>               <dbl>
+## 1 Kingston             4.51
+## 2 Sandisk              4.48
+## 3 Transcend            4.53
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{averagesentiment =}\StringTok{ }\KeywordTok{group_by}\NormalTok{(averagestars1, product) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarize}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{get_sentiment}\NormalTok{(reviewText)))}
+\NormalTok{averagesentiment}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   product   `mean(get_sentiment(reviewText))`
+##   <chr>                                 <dbl>
+## 1 Kingston                               1.27
+## 2 Sandisk                                1.34
+## 3 Transcend                              1.10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{textcorpus =}\StringTok{ }\KeywordTok{VCorpus}\NormalTok{(}\KeywordTok{VectorSource}\NormalTok{(averagestars1}\OperatorTok{$}\NormalTok{reviewText))}
+\NormalTok{corp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(textcorpus, removePunctuation)}
+\NormalTok{corp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(corp, removeNumbers)}
+\NormalTok{corp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(corp, }\KeywordTok{content_transformer}\NormalTok{(tolower) ,}\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{corp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(corp, }\KeywordTok{content_transformer}\NormalTok{(removeWords), }\KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{) ,}\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{corp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(corp, }\KeywordTok{content_transformer}\NormalTok{(stemDocument),}\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{finalcorpus =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(corp, stripWhitespace)}
+\NormalTok{dtmatrix =}\StringTok{ }\KeywordTok{DocumentTermMatrix}\NormalTok{(finalcorpus)}
+\NormalTok{minthresh =}\StringTok{ }\FloatTok{0.95}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq}\NormalTok{(}\FloatTok{0.94}\NormalTok{,}\FloatTok{0.96}\NormalTok{, }\DataTypeTok{by=}\FloatTok{0.001}\NormalTok{)) \{}
+ \ControlFlowTok{if}\NormalTok{ (}\KeywordTok{dim}\NormalTok{(}\KeywordTok{removeSparseTerms}\NormalTok{(dtmatrix, i))[}\DecValTok{2}\NormalTok{] }\OperatorTok{>}\StringTok{ }\KeywordTok{dim}\NormalTok{(}\KeywordTok{removeSparseTerms}\NormalTok{(dtmatrix, minthresh))[}\DecValTok{2}\NormalTok{] }\OperatorTok{&}
+\StringTok{ }\KeywordTok{dim}\NormalTok{(}\KeywordTok{removeSparseTerms}\NormalTok{(dtmatrix, i))[}\DecValTok{2}\NormalTok{] }\OperatorTok{<}\StringTok{ }\DecValTok{300}\NormalTok{)\{}
+\NormalTok{ minthresh =}\StringTok{ }\NormalTok{i}
+\NormalTok{ \} }\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{ minthresh =}\StringTok{ }\NormalTok{minthresh}
+\NormalTok{ \}}
+\NormalTok{\}}
+\NormalTok{dtmatrixes =}\StringTok{ }\KeywordTok{removeSparseTerms}\NormalTok{(dtmatrix, minthresh)}
+\NormalTok{thematrix =}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(dtmatrixes)}
+\KeywordTok{rm}\NormalTok{(dtmatrix,dtmatrixes,finalcorpus)}
+\NormalTok{bigdata =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DataTypeTok{overall =}\NormalTok{ averagestars1}\OperatorTok{$}\NormalTok{overall, thematrix))}
+\NormalTok{logmodel =}\StringTok{ }\KeywordTok{lm}\NormalTok{(overall}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data=}\NormalTok{bigdata)}
+\KeywordTok{rm}\NormalTok{(bigdata)}
+\NormalTok{coef =}\StringTok{ }\KeywordTok{coef}\NormalTok{(logmodel)[}\OperatorTok{-}\DecValTok{1}\NormalTok{]}
+\KeywordTok{rm}\NormalTok{(logmodel)}
+\NormalTok{positives =}\StringTok{ }\NormalTok{coef[coef}\OperatorTok{>}\DecValTok{0}\NormalTok{]}
+\NormalTok{highpositives =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(positives,}\DataTypeTok{decreasing=}\NormalTok{T)[}\DecValTok{1}\OperatorTok{:}\DecValTok{30}\NormalTok{])}
+\NormalTok{highpositives}\OperatorTok{$}\NormalTok{words =}\StringTok{ }\KeywordTok{rownames}\NormalTok{(highpositives)}
+\NormalTok{highpositives}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          sort(positives, decreasing = T)[1:30]    words
+## perfect                             0.23119560  perfect
+## faster                              0.20883274   faster
+## alway                               0.19982302    alway
+## capac                               0.19188021    capac
+## great                               0.18924253    great
+## well                                0.18281767     well
+## space                               0.16394428    space
+## size                                0.16197487     size
+## fast                                0.15701702     fast
+## price                               0.15546180    price
+## high                                0.15230294     high
+## flash                               0.14307609    flash
+## far                                 0.14181963      far
+## hold                                0.13714192     hold
+## thing                               0.13043464    thing
+## quick                               0.11101303    quick
+## movi                                0.10368249     movi
+## perform                             0.10345392  perform
+## new                                 0.09613777      new
+## come                                0.09454185     come
+## can                                 0.09358100      can
+## ive                                 0.09175368      ive
+## much                                0.09140095     much
+## tablet                              0.08519720   tablet
+## reliabl                             0.08311273  reliabl
+## need                                0.08253182     need
+## microsd                             0.08128218  microsd
+## transfer                            0.07939488 transfer
+## video                               0.07508259    video
+## want                                0.07418700     want
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{negatives =}\StringTok{ }\NormalTok{coef[coef}\OperatorTok{<}\DecValTok{0}\NormalTok{]}
+\NormalTok{highnegatives =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(negatives,}\DataTypeTok{decreasing=}\NormalTok{T)[}\DecValTok{1}\OperatorTok{:}\DecValTok{30}\NormalTok{])}
+\NormalTok{highnegatives}\OperatorTok{$}\NormalTok{words =}\StringTok{ }\KeywordTok{rownames}\NormalTok{(highnegatives)}
+\NormalTok{highnegatives}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         sort(negatives, decreasing = T)[1:30]   words
+## work                             -0.001550455    work
+## sinc                             -0.002500216    sinc
+## format                           -0.006835911  format
+## note                             -0.008298375    note
+## just                             -0.008580523    just
+## seem                             -0.015913969    seem
+## pictur                           -0.016474040  pictur
+## galaxi                           -0.017131311  galaxi
+## realli                           -0.017998578  realli
+## now                              -0.018968174     now
+## canon                            -0.020257600   canon
+## will                             -0.020280557    will
+## devic                            -0.021725237   devic
+## photo                            -0.023104926   photo
+## its                              -0.027822459     its
+## sandisk                          -0.028798642 sandisk
+## card                             -0.030067921    card
+## also                             -0.031389539    also
+## qualiti                          -0.032172457 qualiti
+## product                          -0.035591984 product
+## class                            -0.036965519   class
+## year                             -0.037357892    year
+## the                              -0.037670973     the
+## becaus                           -0.037675073  becaus
+## bought                           -0.039762313  bought
+## know                             -0.043496064    know
+## buy                              -0.044585155     buy
+## expect                           -0.045393100  expect
+## record                           -0.045505229  record
+## camera                           -0.053731985  camera
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{wordcloud}\NormalTok{(}\DataTypeTok{words =}\NormalTok{ highpositives[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{freq =} \KeywordTok{abs}\NormalTok{(highpositives[,}\DecValTok{1}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in wordcloud(words = highpositives[, 2], freq = abs(highpositives[, :
+## faster could not be fit on page. It will not be plotted.
+\end{verbatim}
+
+\includegraphics{lab_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{wordcloud}\NormalTok{(}\DataTypeTok{words =}\NormalTok{ highnegatives[,}\DecValTok{2}\NormalTok{], }\DataTypeTok{freq =} \KeywordTok{abs}\NormalTok{(highnegatives[,}\DecValTok{1}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lab_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{helpfuldata =}\StringTok{ }\NormalTok{reviews }\OperatorTok{%>%}\StringTok{ }\KeywordTok{separate}\NormalTok{(helpful, }\KeywordTok{c}\NormalTok{(}\StringTok{"helpful"}\NormalTok{, }\StringTok{"unhelpful"}\NormalTok{), }\StringTok{","}\NormalTok{)}
+\NormalTok{helpfuldata}\OperatorTok{$}\NormalTok{helpful =}\StringTok{ }\KeywordTok{str_remove}\NormalTok{(helpfuldata}\OperatorTok{$}\NormalTok{helpful, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{["}\NormalTok{)}
+\NormalTok{helpfuldata}\OperatorTok{$}\NormalTok{unhelpful =}\StringTok{ }\KeywordTok{str_remove}\NormalTok{(helpfuldata}\OperatorTok{$}\NormalTok{unhelpful, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{]"}\NormalTok{)}
+\NormalTok{helpfuldata}\OperatorTok{$}\NormalTok{sentiment =}\StringTok{ }\KeywordTok{get_sentiment}\NormalTok{(helpfuldata}\OperatorTok{$}\NormalTok{reviewText)}
+\NormalTok{helpfuldata}\OperatorTok{$}\NormalTok{wordcount =}\StringTok{ }\KeywordTok{str_count}\NormalTok{(helpfuldata}\OperatorTok{$}\NormalTok{reviewText, }\StringTok{"}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{w+"}\NormalTok{)}
+\NormalTok{helpfuldata}\OperatorTok{$}\NormalTok{helpfulbinary =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(helpfuldata}\OperatorTok{$}\NormalTok{helpful }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{seperaterows =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(helpfuldata),}\FloatTok{0.8}\OperatorTok{*}\KeywordTok{nrow}\NormalTok{(helpfuldata))}
+\NormalTok{training =}\StringTok{ }\NormalTok{helpfuldata[seperaterows,]}
+\NormalTok{testing =}\StringTok{ }\NormalTok{helpfuldata[}\OperatorTok{-}\NormalTok{seperaterows,]}
+\NormalTok{logfit =}\StringTok{ }\KeywordTok{glm}\NormalTok{(helpfulbinary }\OperatorTok{~}\StringTok{ }\KeywordTok{abs}\NormalTok{(sentiment) }\OperatorTok{+}\StringTok{ }\NormalTok{wordcount, training, }\DataTypeTok{family =}\NormalTok{ binomial)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(logfit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = helpfulbinary ~ abs(sentiment) + wordcount, family = binomial, 
+##     data = training)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.8207  -0.8619  -0.7721   1.2062   1.7130  
+## 
+## Coefficients:
+##                  Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)    -1.2595509  0.0152326  -82.69  < 2e-16 ***
+## abs(sentiment)  0.0385826  0.0050434    7.65 2.01e-14 ***
+## wordcount       0.0055934  0.0001153   48.53  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 70495  on 52646  degrees of freedom
+## Residual deviance: 63372  on 52644  degrees of freedom
+## AIC: 63378
+## 
+## Number of Fisher Scoring iterations: 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testz =}\StringTok{ }\KeywordTok{mean}\NormalTok{(testing}\OperatorTok{$}\NormalTok{helpfulbinary }\OperatorTok{==}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{predict}\NormalTok{(logfit, }\DataTypeTok{newdata =}\NormalTok{ testing, }\DataTypeTok{type =}
+\StringTok{"response"}\NormalTok{) }\OperatorTok{>}\StringTok{ }\FloatTok{0.4}\NormalTok{))}
+\NormalTok{testz}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.695411
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"my model is about 9% better"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "my model is about 9% better"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logfit1 =}\StringTok{ }\KeywordTok{glm}\NormalTok{(helpfulbinary }\OperatorTok{~}\StringTok{ }\KeywordTok{abs}\NormalTok{(sentiment) }\OperatorTok{+}\StringTok{ }\KeywordTok{abs}\NormalTok{(sentiment)}\OperatorTok{/}\NormalTok{wordcount }\OperatorTok{+}\StringTok{ }\NormalTok{overall }\OperatorTok{+}\StringTok{ }\NormalTok{wordcount, training, }\DataTypeTok{family =}\NormalTok{ binomial)}
+\KeywordTok{summary}\NormalTok{(logfit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = helpfulbinary ~ abs(sentiment) + abs(sentiment)/wordcount + 
+##     overall + wordcount, family = binomial, data = training)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.4142  -0.8659  -0.7136   1.1457   4.0635  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)              -6.247e-01  3.599e-02  -17.36   <2e-16 ***
+## abs(sentiment)            1.062e-01  5.491e-03   19.35   <2e-16 ***
+## overall                  -1.895e-01  7.959e-03  -23.81   <2e-16 ***
+## wordcount                 6.027e-03  1.301e-04   46.34   <2e-16 ***
+## abs(sentiment):wordcount -1.782e-04  8.045e-06  -22.15   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 70495  on 52646  degrees of freedom
+## Residual deviance: 62457  on 52642  degrees of freedom
+## AIC: 62467
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testzeros1 =}\StringTok{ }\KeywordTok{mean}\NormalTok{(testing}\OperatorTok{$}\NormalTok{helpfulbinary }\OperatorTok{==}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{predict}\NormalTok{(logfit1, }\DataTypeTok{newdata =}\NormalTok{ testing, }\DataTypeTok{type =}
+\StringTok{"response"}\NormalTok{) }\OperatorTok{>}\StringTok{ }\FloatTok{0.3}\NormalTok{))}
+\NormalTok{testzeros1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6422276
+\end{verbatim}
+
+\end{document}

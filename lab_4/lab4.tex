@@ -1,0 +1,574 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Lab\_4},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Lab\_4}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'readr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'lubridate' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidyverse' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.3     v purrr   0.3.4
+## v tibble  3.1.0     v stringr 1.4.0
+## v tidyr   1.1.3     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tibble' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'purrr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'stringr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'forcats' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x lubridate::as.difftime() masks base::as.difftime()
+## x lubridate::date()        masks base::date()
+## x dplyr::filter()          masks stats::filter()
+## x lubridate::intersect()   masks base::intersect()
+## x dplyr::lag()             masks stats::lag()
+## x lubridate::setdiff()     masks base::setdiff()
+## x lubridate::union()       masks base::union()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(magrittr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'magrittr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'magrittr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     set_names
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tidyr':
+## 
+##     extract
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rpart)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rpart' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'knitr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rpart.plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rpart.plot' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(TeachingDemos)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'TeachingDemos' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"C:/Users/User/OneDrive/Desktop/Spring 2021/OIDD 245/lab_4"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingdata =}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"train_data.csv"}\NormalTok{, }\DataTypeTok{skip=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   term = col_character(),
+##   int_rate = col_character(),
+##   grade = col_character(),
+##   sub_grade = col_character(),
+##   emp_title = col_character(),
+##   emp_length = col_character(),
+##   home_ownership = col_character(),
+##   verification_status = col_character(),
+##   issue_d = col_character(),
+##   loan_status = col_character(),
+##   pymnt_plan = col_character(),
+##   url = col_character(),
+##   desc = col_logical(),
+##   purpose = col_character(),
+##   title = col_character(),
+##   zip_code = col_character(),
+##   addr_state = col_character(),
+##   earliest_cr_line = col_character(),
+##   revol_util = col_character(),
+##   initial_list_status = col_character()
+##   # ... with 21 more columns
+## )
+## i Use `spec()` for the full column specifications.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: 15278 parsing failures.
+##    row  col           expected                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            actual             file
+##  29641 desc 1/0/T/F/TRUE/FALSE Looking to borrow to purchase a used boat we are interested in                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    'train_data.csv'
+##  62994 desc 1/0/T/F/TRUE/FALSE I support myself and my mother and have taken on debt to assist with her bills and health care needs. I would like to pay down debt faster through refinancing at a lower rate.                                                                                                                                                                                                                                                                                                                                                                                                   'train_data.csv'
+##  95678 desc 1/0/T/F/TRUE/FALSE Trying to pay a friend back for apartment broker's fee incurred from as well as credit card stuff.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                'train_data.csv'
+## 109153 desc 1/0/T/F/TRUE/FALSE Dear Lenders,  I have gotten into debt by being a single mom and putting myself through school.  I relied too heavily on credit cards.  I am finally a working teacher and want to be debt free.  I always pay my bills on time, but paying the minimum on credit cards, etc is taking too long and the interest rates are crazy.  I am looking to consolidate at a lower rate and can and want to pay $1000 per month.  Thank you for your consideration.  I know my credit score is not great, but if you look at it closely you will see that I am not delinquent on anything! 'train_data.csv'
+## 192161 desc 1/0/T/F/TRUE/FALSE Borrower added on 03/18/14 > Kitchen and front bathroom improvement to increase value of home.<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                'train_data.csv'
+## ...... .... .................. ................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................. ................
+## See problems(...) for more details.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testdata =}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"test_data.csv"}\NormalTok{, }\DataTypeTok{skip=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   term = col_character(),
+##   int_rate = col_character(),
+##   grade = col_character(),
+##   sub_grade = col_character(),
+##   emp_title = col_character(),
+##   emp_length = col_character(),
+##   home_ownership = col_character(),
+##   verification_status = col_character(),
+##   issue_d = col_character(),
+##   loan_status = col_character(),
+##   pymnt_plan = col_character(),
+##   url = col_character(),
+##   desc = col_logical(),
+##   purpose = col_character(),
+##   title = col_character(),
+##   zip_code = col_character(),
+##   addr_state = col_character(),
+##   earliest_cr_line = col_character(),
+##   revol_util = col_character(),
+##   initial_list_status = col_character()
+##   # ... with 5 more columns
+## )
+## i Use `spec()` for the full column specifications.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: 37 parsing failures.
+##   row  col           expected                                                                                                                                                                                                                                                                                                                                                                     actual            file
+##  1463 desc 1/0/T/F/TRUE/FALSE We knew that using our credit cards to finance an adoption would squeeze us, but then medical and other unexpected expenses made the situation almost impossible. We are a stable family in a stable community. We just need to break a cycle of debt that is getting worse.                                                                                               'test_data.csv'
+## 33079 desc 1/0/T/F/TRUE/FALSE I had a bad year two years ago, with some late and missed payments. I'm doing much better now, but I've got fees and some higher interest bits that have added up on top of the other stuff, and it's a little crazy. I'm hoping doing it thru Lending Club will make it easier - and cheaper - to pay off.                                                                'test_data.csv'
+## 38001 desc 1/0/T/F/TRUE/FALSE Lenders,  I have the ability to pay off my current debt but, would like the ability to be able to put some extra money off to the side and build my personal savings account.  The lower interest rate of roughly 7% would enable me to do that.  I'm willing to share my credit report to anyone that is willing to help out. Please consider my application.  Thank you, 'test_data.csv'
+## 50663 desc 1/0/T/F/TRUE/FALSE I paid off my first Prosper loan, but had an emergency and took out a second Prosper loan, but at a very high interest rate - and I would like the opportunity to get the interest rate lowered.  This loan would be used to pay off the second Prosper Loan.                                                                                                              'test_data.csv'
+## 68354 desc 1/0/T/F/TRUE/FALSE I want to cut down on my credit  card debt now (while they are not wildly out of control) by consolidating them all in one so I can make regular payments to one single source rather than keeping on track of several credit cards payment.                                                                                                                               'test_data.csv'
+## ..... .... .................. .......................................................................................................................................................................................................................................................................................................................................................................... ...............
+## See problems(...) for more details.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingdata =}\StringTok{ }\KeywordTok{head}\NormalTok{(trainingdata, }\DecValTok{-2}\NormalTok{)}
+\NormalTok{a =}\StringTok{ }\KeywordTok{set.seed}\NormalTok{(}\DecValTok{17}\NormalTok{)}
+\NormalTok{trainingdata}\OperatorTok{$}\NormalTok{highgrade =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{grade }\OperatorTok{==}\StringTok{ "A"}\OperatorTok{|}\StringTok{ }\NormalTok{trainingdata}\OperatorTok{$}\NormalTok{grade }\OperatorTok{==}\StringTok{ "B"}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{prop =}\StringTok{ }\KeywordTok{sum}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{highgrade)}\OperatorTok{/}\KeywordTok{nrow}\NormalTok{(trainingdata)}
+\NormalTok{prop}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4160905
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logreg =}\StringTok{ }\KeywordTok{glm}\NormalTok{(highgrade }\OperatorTok{~}\StringTok{ }\NormalTok{annual_inc }\OperatorTok{+}\StringTok{ }\NormalTok{home_ownership }\OperatorTok{+}\StringTok{ }\NormalTok{loan_amnt }\OperatorTok{+}\StringTok{ }\NormalTok{verification_status}
+\OperatorTok{+}\StringTok{ }\NormalTok{purpose, }\DataTypeTok{data=}\NormalTok{trainingdata, }\DataTypeTok{family =}\NormalTok{ binomial)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(logreg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = highgrade ~ annual_inc + home_ownership + loan_amnt + 
+##     verification_status + purpose, family = binomial, data = trainingdata)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -8.4904  -0.9499  -0.7030   1.1244   2.6029  
+## 
+## Coefficients:
+##                                      Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                         8.188e+00  2.666e+01   0.307   0.7588    
+## annual_inc                          8.547e-06  1.216e-07  70.261  < 2e-16 ***
+## home_ownershipMORTGAGE             -8.055e+00  2.666e+01  -0.302   0.7626    
+## home_ownershipOWN                  -8.071e+00  2.666e+01  -0.303   0.7621    
+## home_ownershipRENT                 -8.180e+00  2.666e+01  -0.307   0.7590    
+## loan_amnt                          -3.895e-05  6.762e-07 -57.601  < 2e-16 ***
+## verification_statusSource Verified -6.533e-01  1.090e-02 -59.928  < 2e-16 ***
+## verification_statusVerified        -9.497e-01  1.245e-02 -76.262  < 2e-16 ***
+## purposecredit_card                  8.271e-01  4.978e-02  16.617  < 2e-16 ***
+## purposedebt_consolidation          -8.011e-02  4.925e-02  -1.627   0.1038    
+## purposehome_improvement            -3.269e-01  5.256e-02  -6.219 5.02e-10 ***
+## purposehouse                       -2.032e+00  1.385e-01 -14.673  < 2e-16 ***
+## purposemajor_purchase              -1.265e-01  5.963e-02  -2.121   0.0339 *  
+## purposemedical                     -1.177e+00  7.063e-02 -16.659  < 2e-16 ***
+## purposemoving                      -2.159e+00  1.037e-01 -20.814  < 2e-16 ***
+## purposeother                       -1.173e+00  5.481e-02 -21.394  < 2e-16 ***
+## purposerenewable_energy            -2.306e+00  3.299e-01  -6.990 2.74e-12 ***
+## purposesmall_business              -1.844e+00  8.677e-02 -21.251  < 2e-16 ***
+## purposevacation                    -1.294e+00  8.797e-02 -14.712  < 2e-16 ***
+## purposewedding                     -4.688e-01  7.629e-01  -0.614   0.5389    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 319984  on 235628  degrees of freedom
+## Residual deviance: 290586  on 235609  degrees of freedom
+## AIC: 290626
+## 
+## Number of Fisher Scoring iterations: 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingdata}\OperatorTok{$}\NormalTok{Prob_pred =}\StringTok{ }\KeywordTok{predict}\NormalTok{(logreg, }\DataTypeTok{newdata=}\NormalTok{trainingdata, }\DataTypeTok{type=}\StringTok{'response'}\NormalTok{)}
+
+\CommentTok{#creating a column that classifies loans as being high grade or not}
+\CommentTok{#using threshold of 0.5}
+\NormalTok{trainingdata}\OperatorTok{$}\NormalTok{Highg_pred_}\DecValTok{5}\NormalTok{ =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{Prob_pred }\OperatorTok{>=}\StringTok{ }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\CommentTok{#using threshold of 0.6}
+\NormalTok{trainingdata}\OperatorTok{$}\NormalTok{Highg_pred_}\DecValTok{6}\NormalTok{ =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{Prob_pred }\OperatorTok{>=}\StringTok{ }\FloatTok{0.6}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{hgaccuracy_}\DecValTok{5}\NormalTok{ =}\StringTok{ }\KeywordTok{sum}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{highgrade }\OperatorTok{==}\StringTok{ }\NormalTok{trainingdata}\OperatorTok{$}\NormalTok{Highg_pred_}\DecValTok{5}\NormalTok{) }\OperatorTok{/}\StringTok{ }\KeywordTok{nrow}\NormalTok{(trainingdata)}
+\NormalTok{hgaccuracy_}\DecValTok{6}\NormalTok{ =}\StringTok{ }\KeywordTok{sum}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{highgrade }\OperatorTok{==}\StringTok{ }\NormalTok{trainingdata}\OperatorTok{$}\NormalTok{Highg_pred_}\DecValTok{6}\NormalTok{) }\OperatorTok{/}\StringTok{ }\KeywordTok{nrow}\NormalTok{(trainingdata)}
+
+\KeywordTok{paste}\NormalTok{(}\StringTok{"accuracy on training data using 0.5 threshold:"}\NormalTok{, hgaccuracy_}\DecValTok{5}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "accuracy on training data using 0.5 threshold: 0.662409975003077"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{paste}\NormalTok{(}\StringTok{"accuracy on training datra using 0.6 threshold:"}\NormalTok{, hgaccuracy_}\DecValTok{6}\NormalTok{) }\CommentTok{#accuracy using 0.6 threshold is 64%}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "accuracy on training datra using 0.6 threshold: 0.642136579113776"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{normalaccuracy =}\StringTok{ }\KeywordTok{sum}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{Highg_pred_}\DecValTok{5} \OperatorTok{==}\StringTok{ }\DecValTok{0}\NormalTok{) }\OperatorTok{/}\StringTok{ }\KeywordTok{nrow}\NormalTok{(trainingdata)}
+\KeywordTok{paste}\NormalTok{(}\StringTok{"accuracy of a classifier that assigns a value of 0 to all rows ="}\NormalTok{, normalaccuracy)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "accuracy of a classifier that assigns a value of 0 to all rows = 0.677123783575027"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{classtree =}\StringTok{ }\KeywordTok{rpart}\NormalTok{(highgrade }\OperatorTok{~}\StringTok{ }\NormalTok{annual_inc }\OperatorTok{+}\StringTok{ }\NormalTok{home_ownership }\OperatorTok{+}\StringTok{ }\NormalTok{loan_amnt }\OperatorTok{+}\StringTok{ }\NormalTok{verification_status }\OperatorTok{+}\StringTok{ }\NormalTok{purpose, }\DataTypeTok{data=}\NormalTok{trainingdata, }\DataTypeTok{method =} \StringTok{"class"}\NormalTok{)}
+\KeywordTok{rpart.plot}\NormalTok{(classtree, }\DataTypeTok{type=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lab4_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z =}\StringTok{ }\KeywordTok{predict}\NormalTok{(classtree, }\DataTypeTok{type=}\StringTok{"class"}\NormalTok{)}
+\KeywordTok{paste}\NormalTok{(}\StringTok{"accuracy of classification tree:"}\NormalTok{,}\KeywordTok{mean}\NormalTok{(trainingdata}\OperatorTok{$}\NormalTok{highgrade }\OperatorTok{==}\StringTok{ }\NormalTok{z))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "accuracy of classification tree: 0.647585823476737"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"accuracy of logistic reg with 0.5 threshold (66%) is greater than that of classification tree"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "accuracy of logistic reg with 0.5 threshold (66%) is greater than that of classification tree"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testdata =}\StringTok{ }\KeywordTok{head}\NormalTok{(testdata, }\DecValTok{-2}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(purpose }\OperatorTok{!=}\StringTok{ "educational"}\NormalTok{)}
+
+\NormalTok{testdata}\OperatorTok{$}\NormalTok{highgrade =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(testdata}\OperatorTok{$}\NormalTok{grade }\OperatorTok{==}\StringTok{ "A"}\OperatorTok{|}\StringTok{ }\NormalTok{testdata}\OperatorTok{$}\NormalTok{grade }\OperatorTok{==}\StringTok{ "B"}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{testdata}\OperatorTok{$}\NormalTok{predict_prob =}\StringTok{ }\KeywordTok{predict}\NormalTok{(logreg, }\DataTypeTok{newdata =}\NormalTok{ testdata, }\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{testdata}\OperatorTok{$}\NormalTok{predict_grade =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(testdata}\OperatorTok{$}\NormalTok{predict_prob }\OperatorTok{>=}\StringTok{ }\FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+\NormalTok{testing =}\StringTok{ }\KeywordTok{predict}\NormalTok{(classtree, testdata, }\DataTypeTok{type=}\StringTok{"class"}\NormalTok{)}
+
+\KeywordTok{paste}\NormalTok{(}\StringTok{"testing accuracy for log reg ="}\NormalTok{, }\KeywordTok{mean}\NormalTok{(testdata}\OperatorTok{$}\NormalTok{highgrade }\OperatorTok{==}\StringTok{ }\NormalTok{testdata}\OperatorTok{$}\NormalTok{predict_grade))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "testing accuracy for log reg = 0.648601024949299"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{paste}\NormalTok{(}\StringTok{"testing accuracy for classification tree ="}\NormalTok{, }\KeywordTok{mean}\NormalTok{(testdata}\OperatorTok{$}\NormalTok{highgrade }\OperatorTok{==}\StringTok{ }\NormalTok{testing))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "testing accuracy for classification tree = 0.629004450312757"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{paste}\NormalTok{(}\StringTok{"accuracy of a classifier that assigns a value of 0 to all rows"}\NormalTok{, }\KeywordTok{mean}\NormalTok{(}\DecValTok{0} \OperatorTok{==}\StringTok{ }\NormalTok{testdata}\OperatorTok{$}\NormalTok{highgrade))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "accuracy of a classifier that assigns a value of 0 to all rows 0.546559675511881"
+\end{verbatim}
+
+\end{document}

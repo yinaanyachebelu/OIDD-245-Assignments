@@ -1,0 +1,114 @@
+---
+title: "Homework 2"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+
+```{r}
+library(stringr)
+library(httr)
+library(readr)
+library(rvest)
+library(ggplot2)
+library(dplyr)
+library(magrittr)
+library(syuzhet)
+library(tm)
+library(wordcloud)
+library(RColorBrewer)
+library(tidytext)
+library(tidyr)
+library(topicmodels)
+library(xml2)
+library(knitr)
+set_config(config(ssl_verifypeer=0L))
+
+```
+Step 1
+```{r}
+setwd("C:/Users/User/OneDrive/Desktop/Spring 2021/OIDD 245/hw_2")
+cnbcdata = read.csv("NewsArticles.csv")
+cnbccorp = VCorpus(VectorSource(cnbcdata$content))
+cnbccorp = tm_map(cnbccorp, removePunctuation)
+cnbccorp = tm_map(cnbccorp, removeNumbers)
+cnbccorp = tm_map(cnbccorp, content_transformer(removeWords), stopwords("SMART"), lazy=TRUE)
+cnbccorp = tm_map(cnbccorp, content_transformer(tolower), lazy=TRUE)
+cnbccorp = tm_map(cnbccorp, content_transformer(stemDocument), lazy=TRUE)
+cnbccorp = tm_map(cnbccorp, stripWhitespace)
+datamatrix = DocumentTermMatrix(cnbccorp)
+datamatrix = removeSparseTerms(datamatrix , .995)
+cnbcmatrix = as.matrix(datamatrix)
+traindata = cnbcmatrix[1:5000,]
+topics = LDA(traindata, k = 10, control = list(seed = 124))
+```
+```{r}
+results = terms(topics, 10)
+results
+```
+```{r}
+topicsguesses = c("Tech", "Real Estate", "People", "Business", "Finance", "Energy","Markets", "Health", "Politics", "Time")
+```
+
+Step 2: Retrive New Articles
+
+```{r}
+read_lines("headlines.csv", n_max = -1L)
+headlines = read_lines("headlines.csv", n_max = -1L)
+```
+```{r}
+#headlines = read.csv("headlines.csv")
+scrapedarticles = data.frame(url = headlines, stringsAsFactors = FALSE)
+
+for (m in 1:20) {
+cnbclink = read_html(scrapedarticles$url[m],sep="")
+
+scrapedarticles[m, "text"] = cnbclink %>% html_nodes(".group p") %>% html_text() %>% paste(collapse = '\n') 
+
+scrapedarticles[m, "text"] <- gsub("\n", " ", scrapedarticles[m,"text"])
+scrapedarticles[m, "text"] <- gsub('\t', " ", scrapedarticles[m,"text"])
+scrapedarticles[m, "text"] <- gsub('`\`', " ", scrapedarticles[m,"text"])
+scrapedarticles[m, "text"] <- gsub('[[:punct:]]', " ", scrapedarticles[m, "text"])
+scrapedarticles[m, "text"] <- gsub('[[:cntrl:]]', " ", scrapedarticles[m, "text"])
+}
+scrapedarticles[2,2]
+
+```
+```{r}
+head(scrapedarticles)
+```
+```{r}
+cleaned = VCorpus(VectorSource(scrapedarticles$text))
+cleaned = tm_map(cleaned, removePunctuation)
+cleaned = tm_map(cleaned, removeNumbers)
+cleaned = tm_map(cleaned, content_transformer(removeWords), stopwords("SMART"), lazy=TRUE)
+cleaned = tm_map(cleaned, content_transformer(tolower), lazy=TRUE)
+cleaned = tm_map(cleaned, content_transformer(stemDocument), lazy=TRUE)
+cleaned = tm_map(cleaned, stripWhitespace)
+
+```
+
+Step 3: Classify new articles
+
+```{r}
+dic = Terms(datamatrix)
+dtmnews = DocumentTermMatrix(cleaned, control=list(dictionary = dic))
+dtmnews = dtmnews[rowSums(as.matrix(dtmnews))!=0,]
+topic_probabilities = posterior(topics, dtmnews)
+clusters = as.data.frame(topic_probabilities$topics)
+colnames(clusters) = c(topicsguesses)
+clusters$topic <- colnames(clusters)[max.col(clusters, ties.method="first")]
+scrapedarticles$topic = clusters$topic
+scrapedarticles$text = substr(scrapedarticles$text, start = 1, stop = 80)
+
+kable(head(scrapedarticles,10))
+```
+
+
+
+
+
+
+
+

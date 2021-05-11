@@ -1,0 +1,81 @@
+---
+title: "Lab_4"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+
+```{r}
+library(dplyr)
+library(readr)
+library(lubridate)
+library(tidyverse)
+library(magrittr)
+library(rpart)
+library(knitr)
+library(rpart.plot)
+library(TeachingDemos)
+
+setwd("C:/Users/User/OneDrive/Desktop/Spring 2021/OIDD 245/lab_4")
+
+```
+```{r}
+trainingdata = read_csv(file = "train_data.csv", skip=1)
+testdata = read_csv(file = "test_data.csv", skip=1)
+trainingdata = head(trainingdata, -2)
+a = set.seed(17)
+trainingdata$highgrade = ifelse(trainingdata$grade == "A"| trainingdata$grade == "B", 1,0)
+prop = sum(trainingdata$highgrade)/nrow(trainingdata)
+prop
+
+```
+```{r}
+logreg = glm(highgrade ~ annual_inc + home_ownership + loan_amnt + verification_status
++ purpose, data=trainingdata, family = binomial)
+summary(logreg)
+```
+```{r}
+trainingdata$Prob_pred = predict(logreg, newdata=trainingdata, type='response')
+
+#creating a column that classifies loans as being high grade or not
+#using threshold of 0.5
+trainingdata$Highg_pred_5 = ifelse(trainingdata$Prob_pred >= 0.5, 1, 0)
+#using threshold of 0.6
+trainingdata$Highg_pred_6 = ifelse(trainingdata$Prob_pred >= 0.6, 1, 0)
+hgaccuracy_5 = sum(trainingdata$highgrade == trainingdata$Highg_pred_5) / nrow(trainingdata)
+hgaccuracy_6 = sum(trainingdata$highgrade == trainingdata$Highg_pred_6) / nrow(trainingdata)
+
+paste("accuracy on training data using 0.5 threshold:", hgaccuracy_5) 
+paste("accuracy on training datra using 0.6 threshold:", hgaccuracy_6) #accuracy using 0.6 threshold is 64%
+
+normalaccuracy = sum(trainingdata$Highg_pred_5 == 0) / nrow(trainingdata)
+paste("accuracy of a classifier that assigns a value of 0 to all rows =", normalaccuracy)
+```
+```{r}
+classtree = rpart(highgrade ~ annual_inc + home_ownership + loan_amnt + verification_status + purpose, data=trainingdata, method = "class")
+rpart.plot(classtree, type=5)
+
+```
+```{r}
+z = predict(classtree, type="class")
+paste("accuracy of classification tree:",mean(trainingdata$highgrade == z))
+print("accuracy of logistic reg with 0.5 threshold (66%) is greater than that of classification tree")
+```
+```{r}
+testdata = head(testdata, -2) %>% filter(purpose != "educational")
+
+testdata$highgrade = ifelse(testdata$grade == "A"| testdata$grade == "B", 1,0)
+testdata$predict_prob = predict(logreg, newdata = testdata, type="response")
+testdata$predict_grade = ifelse(testdata$predict_prob >= 0.5, 1, 0)
+testing = predict(classtree, testdata, type="class")
+
+paste("testing accuracy for log reg =", mean(testdata$highgrade == testdata$predict_grade))
+paste("testing accuracy for classification tree =", mean(testdata$highgrade == testing))
+paste("accuracy of a classifier that assigns a value of 0 to all rows", mean(0 == testdata$highgrade))
+
+```
+
+
+
+

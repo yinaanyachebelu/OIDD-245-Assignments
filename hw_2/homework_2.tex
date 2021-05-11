@@ -1,0 +1,606 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Homework 2},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Homework 2}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(stringr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'stringr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(httr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'httr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'readr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(rvest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'rvest' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rvest'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:readr':
+## 
+##     guess_encoding
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(magrittr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'magrittr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(syuzhet)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'syuzhet' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tm' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: NLP
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'NLP'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:ggplot2':
+## 
+##     annotate
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:httr':
+## 
+##     content
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(wordcloud)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'wordcloud' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: RColorBrewer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(RColorBrewer)}
+\KeywordTok{library}\NormalTok{(tidytext)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidytext' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'tidyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:magrittr':
+## 
+##     extract
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(topicmodels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'topicmodels' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(xml2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'xml2' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'knitr' was built under R version 4.0.4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set_config}\NormalTok{(}\KeywordTok{config}\NormalTok{(}\DataTypeTok{ssl_verifypeer=}\NormalTok{0L))}
+\end{Highlighting}
+\end{Shaded}
+
+Step 1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{setwd}\NormalTok{(}\StringTok{"C:/Users/User/OneDrive/Desktop/Spring 2021/OIDD 245/hw_2"}\NormalTok{)}
+\NormalTok{cnbcdata =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"NewsArticles.csv"}\NormalTok{)}
+\NormalTok{cnbccorp =}\StringTok{ }\KeywordTok{VCorpus}\NormalTok{(}\KeywordTok{VectorSource}\NormalTok{(cnbcdata}\OperatorTok{$}\NormalTok{content))}
+\NormalTok{cnbccorp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cnbccorp, removePunctuation)}
+\NormalTok{cnbccorp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cnbccorp, removeNumbers)}
+\NormalTok{cnbccorp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cnbccorp, }\KeywordTok{content_transformer}\NormalTok{(removeWords), }\KeywordTok{stopwords}\NormalTok{(}\StringTok{"SMART"}\NormalTok{), }\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{cnbccorp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cnbccorp, }\KeywordTok{content_transformer}\NormalTok{(tolower), }\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{cnbccorp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cnbccorp, }\KeywordTok{content_transformer}\NormalTok{(stemDocument), }\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{cnbccorp =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cnbccorp, stripWhitespace)}
+\NormalTok{datamatrix =}\StringTok{ }\KeywordTok{DocumentTermMatrix}\NormalTok{(cnbccorp)}
+\NormalTok{datamatrix =}\StringTok{ }\KeywordTok{removeSparseTerms}\NormalTok{(datamatrix , }\FloatTok{.995}\NormalTok{)}
+\NormalTok{cnbcmatrix =}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(datamatrix)}
+\NormalTok{traindata =}\StringTok{ }\NormalTok{cnbcmatrix[}\DecValTok{1}\OperatorTok{:}\DecValTok{5000}\NormalTok{,]}
+\NormalTok{topics =}\StringTok{ }\KeywordTok{LDA}\NormalTok{(traindata, }\DataTypeTok{k =} \DecValTok{10}\NormalTok{, }\DataTypeTok{control =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{seed =} \DecValTok{124}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results =}\StringTok{ }\KeywordTok{terms}\NormalTok{(topics, }\DecValTok{10}\NormalTok{)}
+\NormalTok{results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Topic 1     Topic 2   Topic 3   Topic 4   Topic 5   Topic 6   Topic 7   
+##  [1,] "compani"   "sale"    "year"    "compani" "percent" "oil"     "market"  
+##  [2,] "apple"     "home"    "read"    "bank"    "plan"    "price"   "stock"   
+##  [3,] "read"      "retail"  "work"    "billion" "year"    "year"    "rate"    
+##  [4,] "servic"    "price"   "time"    "share"   "peopl"   "car"     "fund"    
+##  [5,] "busi"      "store"   "million" "report"  "financi" "energi"  "percent" 
+##  [6,] "googl"     "year"    "peopl"   "million" "retir"   "product" "year"    
+##  [7,] "user"      "market"  "game"    "deal"    "insur"   "read"    "investor"
+##  [8,] "app"       "read"    "make"    "busi"    "pay"     "vehicl"  "fed"     
+##  [9,] "mobil"     "hous"    "busi"    "read"    "tax"     "gas"     "invest"  
+## [10,] "technolog" "percent" "team"    "firm"    "read"    "water"   "bank"    
+##       Topic 8   Topic 9      Topic 10 
+##  [1,] "read"    "obama"      "percent"
+##  [2,] "ebola"   "presid"     "year"   
+##  [3,] "report"  "state"      "quarter"
+##  [4,] "drug"    "republican" "expect" 
+##  [5,] "peopl"   "read"       "share"  
+##  [6,] "health"  "hous"       "report" 
+##  [7,] "state"   "senat"      "month"  
+##  [8,] "patient" "democrat"   "growth" 
+##  [9,] "citi"    "govern"     "rate"   
+## [10,] "york"    "tax"        "earn"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topicsguesses =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Tech"}\NormalTok{, }\StringTok{"Real Estate"}\NormalTok{, }\StringTok{"People"}\NormalTok{, }\StringTok{"Business"}\NormalTok{, }\StringTok{"Finance"}\NormalTok{, }\StringTok{"Energy"}\NormalTok{,}\StringTok{"Markets"}\NormalTok{, }\StringTok{"Health"}\NormalTok{, }\StringTok{"Politics"}\NormalTok{, }\StringTok{"Time"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Step 2: Retrive New Articles
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{read_lines}\NormalTok{(}\StringTok{"headlines.csv"}\NormalTok{, }\DataTypeTok{n_max =} \OperatorTok{-}\NormalTok{1L)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "https://www.cnbc.com/2021/04/13/pausing-use-of-jj-covid-vaccine-will-not-affect-timeline-of-getting-us-vaccinated-says-doctor.html" 
+##  [2] "https://www.cnbc.com/2021/04/13/biden-to-nominate-robert-santos-for-director-of-us-census-bureau.html"                              
+##  [3] "https://www.cnbc.com/2021/04/13/coinbase-reference-price-250-ahead-of-direct-listing.html"                                          
+##  [4] "https://www.cnbc.com/2021/04/13/cisa-orders-all-agencies-to-install-new-microsoft-exchange-patches.html"                            
+##  [5] "https://www.cnbc.com/2021/04/13/covid-vaccine-moderna-says-new-data-shows-its-90percent-effective-six-months-after-second-dose.html"
+##  [6] "https://www.cnbc.com/2021/04/13/gas-tax-not-considered-in-biden-infrastructure-plan-white-house-says.html"                          
+##  [7] "https://www.cnbc.com/2021/04/13/dr-anthony-fauci-explains-what-the-us-pause-on-jjs-covid-vaccine-means.html"                        
+##  [8] "https://www.cnbc.com/2021/04/13/more-people-likely-wont-want-jjs-covid-vaccine-following-latest-issues-with-blood-clots.html"       
+##  [9] "https://www.cnbc.com/2021/04/13/coinbase-listing-could-revalue-crypto-space-blockchain-etf-creator.html"                            
+## [10] "https://www.cnbc.com/2021/04/13/iran-to-defy-uranium-enrichment-limits-of-2015-nuclear-deal-after-attack.html"                      
+## [11] "https://www.cnbc.com/2021/04/13/coinbase-is-unlike-any-market-debut-wall-street-has-ever-seen-.html"                                
+## [12] "https://www.cnbc.com/2021/04/13/daunte-wright-killing-obama-mourns-minnesota-police-shooting-victim.html"                           
+## [13] "https://www.cnbc.com/2021/04/13/boeings-sales-again-outpace-cancellations-jetliner-deliveries-pick-up.html"                         
+## [14] "https://www.cnbc.com/2021/04/13/microsoft-surface-laptop-4-price-release-date-intel-amd.html"                                       
+## [15] "https://www.cnbc.com/2021/04/13/us-consumer-price-index-march-2021.html"                                                            
+## [16] "https://www.cnbc.com/2021/04/12/pc-market-had-best-q1-since-2015-fastest-growth-in-20-years-gartner.html"                           
+## [17] "https://www.cnbc.com/2021/04/12/google-cloudtop-virtual-desktop-tool-for-employees-only.html"                                       
+## [18] "https://www.cnbc.com/2021/04/12/former-trump-lawyer-michael-cohen-asks-judge-to-suspend-home-confinement.html"                      
+## [19] "https://www.cnbc.com/2021/04/13/us-bonds-treasury-yields-climb-ahead-of-key-inflation-report.html"                                  
+## [20] "https://www.cnbc.com/2021/04/12/biden-says-he-is-willing-to-negotiate-infrastructure-plan.html"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{headlines =}\StringTok{ }\KeywordTok{read_lines}\NormalTok{(}\StringTok{"headlines.csv"}\NormalTok{, }\DataTypeTok{n_max =} \OperatorTok{-}\NormalTok{1L)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#headlines = read.csv("headlines.csv")}
+\NormalTok{scrapedarticles =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{url =}\NormalTok{ headlines, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (m }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\DecValTok{20}\NormalTok{) \{}
+\NormalTok{cnbclink =}\StringTok{ }\KeywordTok{read_html}\NormalTok{(scrapedarticles}\OperatorTok{$}\NormalTok{url[m],}\DataTypeTok{sep=}\StringTok{""}\NormalTok{)}
+
+\NormalTok{scrapedarticles[m, }\StringTok{"text"}\NormalTok{] =}\StringTok{ }\NormalTok{cnbclink }\OperatorTok{%>%}\StringTok{ }\KeywordTok{html_nodes}\NormalTok{(}\StringTok{".group p"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{html_text}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{paste}\NormalTok{(}\DataTypeTok{collapse =} \StringTok{'}\CharTok{\textbackslash{}n}\StringTok{'}\NormalTok{) }
+
+\NormalTok{scrapedarticles[m, }\StringTok{"text"}\NormalTok{] <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\StringTok{" "}\NormalTok{, scrapedarticles[m,}\StringTok{"text"}\NormalTok{])}
+\NormalTok{scrapedarticles[m, }\StringTok{"text"}\NormalTok{] <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{'}\CharTok{\textbackslash{}t}\StringTok{'}\NormalTok{, }\StringTok{" "}\NormalTok{, scrapedarticles[m,}\StringTok{"text"}\NormalTok{])}
+\NormalTok{scrapedarticles[m, }\StringTok{"text"}\NormalTok{] <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{'`\textbackslash{}`'}\NormalTok{, }\StringTok{" "}\NormalTok{, scrapedarticles[m,}\StringTok{"text"}\NormalTok{])}
+\NormalTok{scrapedarticles[m, }\StringTok{"text"}\NormalTok{] <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{'[[:punct:]]'}\NormalTok{, }\StringTok{" "}\NormalTok{, scrapedarticles[m, }\StringTok{"text"}\NormalTok{])}
+\NormalTok{scrapedarticles[m, }\StringTok{"text"}\NormalTok{] <-}\StringTok{ }\KeywordTok{gsub}\NormalTok{(}\StringTok{'[[:cntrl:]]'}\NormalTok{, }\StringTok{" "}\NormalTok{, scrapedarticles[m, }\StringTok{"text"}\NormalTok{])}
+\NormalTok{\}}
+\NormalTok{scrapedarticles[}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "President Joe Biden on Tuesday announced that he will nominate Robert Santos for the Director of the Census Bureau  Santos  if confirmed  would become the first person of color to hold the position  Santos  who is Hispanic  would head the agency in charge of the surveying the population every 10 years to determine distribution of funding to states as well as their political representation  He is an expert in survey sampling  survey design and social science policy research  with over 40 years of experience  the White House said   Biden s latest pick continues on his campaign pledge to create a diverse administration  one which  looks like America   Biden has stated  Santos currently serves as vice president of the Statistics Methods Group at the Urban Institute  a Washington  DC  nonprofit research organization  In that role he had been a critic of the bureau  co authoring a 2019 report warning that the 2020 Census could gravely undercount minorities  The Census Bureau became a political football during the Trump administration when then President Donald Trump and his allies pushed to exclude undocumented immigrants from the count  Trump s Census Bureau Director  Steven Dillingham  resigned in January amid accusations of politicizing the agency that is part of the Commerce Department  The 2020 U S  Census results have been delayed due to challenges surrounding the Covid 19 pandemic  as well as ongoing litigation  It now expects to complete the count on April 30  2021  according to the U S  Government Accountability Office and  deliver redistricting data to all states by September 30  2021   Santos did not immediately respond to CNBC s request for comment  but he said in a statement to NPR   The principles of transparency  scientific independence  and integrity will be key in allowing the Census Bureau to thrive and innovate over the coming decade     CNBC s Tucker Higgins contributed to this report "
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(scrapedarticles)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                                                                                                                                   url
+## 1  https://www.cnbc.com/2021/04/13/pausing-use-of-jj-covid-vaccine-will-not-affect-timeline-of-getting-us-vaccinated-says-doctor.html
+## 2                               https://www.cnbc.com/2021/04/13/biden-to-nominate-robert-santos-for-director-of-us-census-bureau.html
+## 3                                           https://www.cnbc.com/2021/04/13/coinbase-reference-price-250-ahead-of-direct-listing.html
+## 4                             https://www.cnbc.com/2021/04/13/cisa-orders-all-agencies-to-install-new-microsoft-exchange-patches.html
+## 5 https://www.cnbc.com/2021/04/13/covid-vaccine-moderna-says-new-data-shows-its-90percent-effective-six-months-after-second-dose.html
+## 6                           https://www.cnbc.com/2021/04/13/gas-tax-not-considered-in-biden-infrastructure-plan-white-house-says.html
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 text
+## 1                                                                                                                                                                                                                                                                                                                                                                                               America s temporary pause in the use of Johnson   Johnson s single dose Covid 19 vaccine will not interfere with President Joe Biden s goal of getting the nation to some semblance of normalcy by Independence Day  the dean of Brown University s School of Public Health said Tuesday   I think this is going to be a blip on the calendar in terms of getting Americans vaccinated   said Dr  Ashish Jha   I don t think it s going to affect the timeline at all    Federal health agencies advised Tuesday that the U S  should temporarily pause the use of J J s single dose vaccine after six women out of the roughly 6 9 million people who received the shot reported getting severe blood clots  The blood clots occurred in women between the ages of 18 and 48  One woman died and another is in critical condition  They all developed symptoms 6 to 13 days after getting the shot  according to the Centers for Disease Control and Prevention and Food and Drug Administration    Jha told CNBC s  The News with Shepard Smith  that the cautionary measures were proof that  the system is working   and that the government s swift action may counter vaccine hesitancy    My hope is that it will actually build confidence in people that we don t take adverse events lightly  and that we investigate them  and that we really are making sure these vaccines are very  very safe   Anthony Fauci  director of the National Institute of Allergy and Infectious Diseases  reaffirmed that the pause comes  out of an abundance of caution  and that it will give health officials time to investigate    You want to make sure that safety is the important issue here   Fauci said during a White House press briefing Tuesday   We are totally aware that this is a very rare event  We want to get this worked out as quickly as we possibly can   Jha told host Shepard Smith that he  expects the pause to last days  not much longer   and echoed Fauci s assertion on the rarity of the blood clots    The key point here is that this is an incredibly rare  adverse event   Jha said   It s not going to affect very many people at all  and I just think  out of an abundance of caution  we re just taking a pause to  see what else we can find out about it  
+## 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       President Joe Biden on Tuesday announced that he will nominate Robert Santos for the Director of the Census Bureau  Santos  if confirmed  would become the first person of color to hold the position  Santos  who is Hispanic  would head the agency in charge of the surveying the population every 10 years to determine distribution of funding to states as well as their political representation  He is an expert in survey sampling  survey design and social science policy research  with over 40 years of experience  the White House said   Biden s latest pick continues on his campaign pledge to create a diverse administration  one which  looks like America   Biden has stated  Santos currently serves as vice president of the Statistics Methods Group at the Urban Institute  a Washington  DC  nonprofit research organization  In that role he had been a critic of the bureau  co authoring a 2019 report warning that the 2020 Census could gravely undercount minorities  The Census Bureau became a political football during the Trump administration when then President Donald Trump and his allies pushed to exclude undocumented immigrants from the count  Trump s Census Bureau Director  Steven Dillingham  resigned in January amid accusations of politicizing the agency that is part of the Commerce Department  The 2020 U S  Census results have been delayed due to challenges surrounding the Covid 19 pandemic  as well as ongoing litigation  It now expects to complete the count on April 30  2021  according to the U S  Government Accountability Office and  deliver redistricting data to all states by September 30  2021   Santos did not immediately respond to CNBC s request for comment  but he said in a statement to NPR   The principles of transparency  scientific independence  and integrity will be key in allowing the Census Bureau to thrive and innovate over the coming decade     CNBC s Tucker Higgins contributed to this report 
+## 3                                                                                                                                                                                               Nasdaq gave Coinbase a reference price of  250 a share ahead of Wednesday s planned direct listing  which would value the cryptocurrency exchange at about  65 3 billion on a fully diluted basis  Coinbase is set to become the first major crypto business to go public in the U S  and  should it reach a  100 billion market cap  will instantly be one of the country s 85 most valuable companies  The company s value has soared in the past year alongside bitcoin and ethereum  the primary currencies traded on the site  Coinbase chose the direct listing path to the public market rather than pursuing a traditional IPO  That means instead of raising cash by selling new shares to a group of institutional investors  Coinbase is allowing existing stakeholders start selling immediately at a market driven price  The reference price provided by Nasdaq reflects recent private market trades and input from investment bankers but does not indicate where the stock will open  This is Nasdaq s first major direct listing  In the five significant direct listings that have taken place on the New York Stock Exchange — Spotify  Slack  Palantir  Asana and Roblox — the opening price was on average about 37  above the reference price  If Coinbase opens with a similar percentage increase  the price would be around  343  very close to the average private market price in the first quarter of  343 58  Coinbase said last week in announcing preliminary first quarter results that revenue in the period surged ninefold to  1 8 billion  and net income climbed to between  730 million and  800 million from  32 million a year earlier  The vast majority of transactions on Coinbase involve the purchasing of bitcoin and ethereum  which have been on a historic tear  climbing over 800  and 1 300   respectively  in the past year  For the full year of 2020  revenue more than doubled to  1 28 billion  and the company swung from a loss in 2019 to a profit of  322 3 million  Coinbase has mapped out a plan to be at the center of an emerging  cryptoeconomy   in which financial transactions and online marketplaces will largely move to the blockchain  giving investors a wide set of digital currencies to buy and trade  But the company has acknowledged that short term growth will primarily be dictated by the price and transaction volume of bitcoin  WATCH  Crypto strategist on how Coinbase s debut validates cryptocurrencies
+## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Microsoft on Tuesday released patches for three versions of its Exchange Server email and calendar software that companies use in on premises data centers  and the federal government has ordered all agencies to install them  warning that the vulnerabilities being patched  pose an unacceptable risk to the Federal enterprise and require an immediate and emergency action   The updates come a month after Microsoft took action to respond to attacks on other flaws in Exchange Server  which the company said had been exploited by Chinese hackers  But unlike last time  Microsoft said in a blog post it has not yet observed exploits of the newly discovered holes  Nonetheless  the widespread usage of Exchange  and the importance of email in general  has spurred the federal government to sound the alarm  In a Tuesday directive  the U S  Cybersecurity and Infrastructure Security Agency noted that these vulnerabilities are  different from the ones disclosed and fixed in March 2021  and ordered all government agencies to deploy the patches before Friday    Given the powerful privileges that Exchange manages by default and the amount of potentially sensitive information that is stored in Exchange servers operated and hosted by  or on behalf of  federal agencies  Exchange servers are a primary target for adversary activity   CISA wrote   This determination is based on the likelihood of the vulnerabilities being weaponized  combined with the widespread use of the affected software across the Executive Branch and high potential for a compromise of integrity and confidentiality of agency information   The new patches apply to the 2013  2016 and 2019 versions of Exchange Server  The company said organizations using the cloud based Exchange Online service included in Microsoft 365 subscription bundles is already protected  Microsoft gave credit to the U S  National Security Agency for reporting the new vulnerabilities 
+## 5                                                             Moderna s Covid 19 vaccine was more than 90  effective at protecting against Covid and more than 95  effective against severe disease up to six months after the second dose  the company said Tuesday  citing updated data from its phase three clinical trial  The update brings Moderna a step closer to filing its request for full U S  approval for its vaccine  Full approval requires a more rigorous review process to show the shot is safe and effective for its intended use  Once it gets full approval  Moderna can begin marketing the shots directly to consumers and selling them to individuals and private companies in the U S  The new data included Covid 19 cases through April 9 and evaluated over 900 cases  including more than 100 severe cases  it said  The vaccine is currently authorized for emergency use by the Food and Drug Administration for people who are age 18 and older  and the agency can revoke the emergency use authorization  or EUA  at any time  Moderna submitted only two months of follow up safety data for the EUA  The FDA usually requires six months for full approval  The company said its results are preliminary  Moderna said throughout the year it will share updated data on efficacy against asymptomatic infection as well as the persistence of antibodies  The new data comes after a study published in the New England Journal of Medicine showed antibodies induced by the Moderna vaccine were still present six months after the second dose  It also comes after Pfizer said earlier this month its vaccine  which uses technology similar to Moderna s  was also shown to be highly effective six months after the second dose  Dr  Isaac Bogoch  an infectious disease specialist who has sat on several drug data and safety monitoring boards  called Moderna s update  amazing news  and said he s glad to hear that both mRNA vaccines are highly effective at six months   I think it is fair to estimate that they will both have decent efficacy for many months beyond this   he said  Moderna is still evaluating its vaccine in people ages 17 and younger  The company said Tuesday its trial testing the vaccine in adolescents ages 12 to 17 is now fully enrolled  with about 3 000 participants in the U S  It said its trial testing the vaccine in children 6 months to 11 years old is currently enrolling participants  It expects to enroll 6 750 healthy pediatric participants in the U S  and Canada  As in Pfizer s study  kids will begin by receiving a low dose of the vaccine before progressively moving to higher doses 
+## 6 The Biden administration is not considering a hike to the federal gasoline tax as a way to help pay for its landmark infrastructure proposal  according to the White House s top spokeswoman  The subject of the gasoline tax came up during press secretary Jen Psaki s briefing Tuesday afternoon  when a reporter asked her to address reports on Monday that suggested President Joe Biden could be open to raising the gas tax from its current 18 4 cents per gallon   In yesterday s meeting with members of Congress  the president mentioned the gas tax only to make a point that even a significant increase in the gas tax  which some people have proposed  would pay only for a fraction of the investment the country needs   she said   Now  fundamentally  he does not believe that paying for this historic investment in rebuilding our nation s infrastructure and creating millions of jobs should be on the backs of Americans   Asked to confirm that a gas tax hike is not being discussed right now  Psaki answered   Correct   Read more of CNBC s politics coverage  That the White House is not considering an increase to the gas tax is notable given the early hurdles the administration faces in trying to sell its plan to Capitol Hill  Republicans and Democrats like the idea of repairing the nation s roads and bridges  expanding access to broadband and ensuring access to job training  But the Biden plan s  2 trillion price tag has politicians in both parties concerned about the scope of the proposal and ways to pay for what would be another multitrillion dollar fiscal stimulus  To date  the White House has floated the idea of raising the corporate tax rate to 28  from 21  and has sought to deter offshoring of business profits  Biden  who met with a bipartisan group of lawmakers on Monday about the infrastructure plan  has said he will engage with Republicans skeptical of the American Jobs Plan and hear their criticisms  Still  the president has warned that he is willing to move forward on the plan without Republican votes because he views the plan as critical to the economy s recovery from the Covid 19 pandemic  The gas tax concept is often criticized for having a disproportionate impact on rural and low income communities  It also wouldn t be a viable long term option for an administration hoping to persuade more Americans to trade their gas powered cars for electric vehicles  Other than a gas tax  Biden could opt to explore income taxes  a mileage tax  monetizing the electrical grid or financing the plan by covering the interest costs associated with taxable municipal bonds
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cleaned =}\StringTok{ }\KeywordTok{VCorpus}\NormalTok{(}\KeywordTok{VectorSource}\NormalTok{(scrapedarticles}\OperatorTok{$}\NormalTok{text))}
+\NormalTok{cleaned =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cleaned, removePunctuation)}
+\NormalTok{cleaned =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cleaned, removeNumbers)}
+\NormalTok{cleaned =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cleaned, }\KeywordTok{content_transformer}\NormalTok{(removeWords), }\KeywordTok{stopwords}\NormalTok{(}\StringTok{"SMART"}\NormalTok{), }\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{cleaned =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cleaned, }\KeywordTok{content_transformer}\NormalTok{(tolower), }\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{cleaned =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cleaned, }\KeywordTok{content_transformer}\NormalTok{(stemDocument), }\DataTypeTok{lazy=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{cleaned =}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(cleaned, stripWhitespace)}
+\end{Highlighting}
+\end{Shaded}
+
+Step 3: Classify new articles
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dic =}\StringTok{ }\KeywordTok{Terms}\NormalTok{(datamatrix)}
+\NormalTok{dtmnews =}\StringTok{ }\KeywordTok{DocumentTermMatrix}\NormalTok{(cleaned, }\DataTypeTok{control=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{dictionary =}\NormalTok{ dic))}
+\NormalTok{dtmnews =}\StringTok{ }\NormalTok{dtmnews[}\KeywordTok{rowSums}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(dtmnews))}\OperatorTok{!=}\DecValTok{0}\NormalTok{,]}
+\NormalTok{topic_probabilities =}\StringTok{ }\KeywordTok{posterior}\NormalTok{(topics, dtmnews)}
+\NormalTok{clusters =}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(topic_probabilities}\OperatorTok{$}\NormalTok{topics)}
+\KeywordTok{colnames}\NormalTok{(clusters) =}\StringTok{ }\KeywordTok{c}\NormalTok{(topicsguesses)}
+\NormalTok{clusters}\OperatorTok{$}\NormalTok{topic <-}\StringTok{ }\KeywordTok{colnames}\NormalTok{(clusters)[}\KeywordTok{max.col}\NormalTok{(clusters, }\DataTypeTok{ties.method=}\StringTok{"first"}\NormalTok{)]}
+\NormalTok{scrapedarticles}\OperatorTok{$}\NormalTok{topic =}\StringTok{ }\NormalTok{clusters}\OperatorTok{$}\NormalTok{topic}
+\NormalTok{scrapedarticles}\OperatorTok{$}\NormalTok{text =}\StringTok{ }\KeywordTok{substr}\NormalTok{(scrapedarticles}\OperatorTok{$}\NormalTok{text, }\DataTypeTok{start =} \DecValTok{1}\NormalTok{, }\DataTypeTok{stop =} \DecValTok{80}\NormalTok{)}
+
+\KeywordTok{kable}\NormalTok{(}\KeywordTok{head}\NormalTok{(scrapedarticles,}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+\begin{minipage}[b]{0.54\columnwidth}\raggedright
+url\strut
+\end{minipage} & \begin{minipage}[b]{0.33\columnwidth}\raggedright
+text\strut
+\end{minipage} & \begin{minipage}[b]{0.04\columnwidth}\raggedright
+topic\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/pausing-use-of-jj-covid-vaccine-will-not-affect-timeline-of-getting-us-vaccinated-says-doctor.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+America s temporary pause in the use of Johnson Johnson s single dose
+Covid 19\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Health\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/biden-to-nominate-robert-santos-for-director-of-us-census-bureau.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+President Joe Biden on Tuesday announced that he will nominate Robert
+Santos for\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Politics\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/coinbase-reference-price-250-ahead-of-direct-listing.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+Nasdaq gave Coinbase a reference price of 250 a share ahead of Wednesday
+s plan\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Business\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/cisa-orders-all-agencies-to-install-new-microsoft-exchange-patches.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+Microsoft on Tuesday released patches for three versions of its Exchange
+Server\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Tech\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/covid-vaccine-moderna-says-new-data-shows-its-90percent-effective-six-months-after-second-dose.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+Moderna s Covid 19 vaccine was more than 90 effective at protecting
+against Cov\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Health\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/gas-tax-not-considered-in-biden-infrastructure-plan-white-house-says.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+The Biden administration is not considering a hike to the federal
+gasoline tax a\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Politics\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/dr-anthony-fauci-explains-what-the-us-pause-on-jjs-covid-vaccine-means.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+White House chief medical advisor Dr Anthony Fauci said Tuesday that the
+Food a\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Health\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/more-people-likely-wont-want-jjs-covid-vaccine-following-latest-issues-with-blood-clots.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+More Americans will likely refuse to get Johnson Johnson s Covid 19
+vaccine af\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Health\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/coinbase-listing-could-revalue-crypto-space-blockchain-etf-creator.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+The next chapter in the crypto craze is set to be a pivotal one
+Cryptocurrency\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Markets\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.54\columnwidth}\raggedright
+\url{https://www.cnbc.com/2021/04/13/iran-to-defy-uranium-enrichment-limits-of-2015-nuclear-deal-after-attack.html}\strut
+\end{minipage} & \begin{minipage}[t]{0.33\columnwidth}\raggedright
+WASHINGTON -- Iran will begin enriching uranium at 60 a significant step
+toward\strut
+\end{minipage} & \begin{minipage}[t]{0.04\columnwidth}\raggedright
+Politics\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{document}

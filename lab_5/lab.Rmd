@@ -1,0 +1,154 @@
+---
+title: "Lab 5"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r}
+library(dplyr)
+library(magrittr)
+library(readr)
+library(stringr)
+library(rvest)
+library(httr)
+library(tm)
+library(wordcloud)
+library(tidyverse)
+library(tidytext)
+library(syuzhet)
+library(glmnet)
+library(topicmodels)
+```
+```{r}
+setwd("C:/Users/User/OneDrive/Desktop/Spring 2021/OIDD 245/lab_5")
+reviews<- read_csv("electronics_downsample.csv")
+```
+
+```{r}
+rows = str_detect(reviews$reviewText, "\\b(sd|SD)\\b")
+
+reviews[rows,] %>% 
+   group_by(asin) %>% 
+   tally() %>% 
+   arrange(desc(n)) %>% 
+   data.frame() %>% 
+   slice(1:3)
+
+```
+```{r}
+top3 = c("B007WTAJTO", "B002WE6D44", "B000VX6XL6")
+name3 = c("Sandisk", "Transcend", "Kingston")
+top3frame = cbind(asin = top3, product =name3)
+top3frame
+#print("The products are Sandisk, Transcend and Kingston")
+```
+```{r}
+
+averagestars = filter(reviews, reviews$asin %in% top3)
+averagestars1 = merge(averagestars, top3frame, by="asin", all.x=TRUE )
+averagestars2 = group_by(averagestars1, product) %>% summarize(mean(overall))
+averagestars2
+```
+```{r}
+averagesentiment = group_by(averagestars1, product) %>% summarize(mean(get_sentiment(reviewText)))
+averagesentiment
+```
+```{r}
+textcorpus = VCorpus(VectorSource(averagestars1$reviewText))
+corp = tm_map(textcorpus, removePunctuation)
+corp = tm_map(corp, removeNumbers)
+corp = tm_map(corp, content_transformer(tolower) ,lazy=TRUE)
+corp = tm_map(corp, content_transformer(removeWords), stopwords("english") ,lazy=TRUE)
+corp = tm_map(corp, content_transformer(stemDocument),lazy=TRUE)
+finalcorpus = tm_map(corp, stripWhitespace)
+dtmatrix = DocumentTermMatrix(finalcorpus)
+minthresh = 0.95
+for (i in seq(0.94,0.96, by=0.001)) {
+ if (dim(removeSparseTerms(dtmatrix, i))[2] > dim(removeSparseTerms(dtmatrix, minthresh))[2] &
+ dim(removeSparseTerms(dtmatrix, i))[2] < 300){
+ minthresh = i
+ } else{
+ minthresh = minthresh
+ }
+}
+dtmatrixes = removeSparseTerms(dtmatrix, minthresh)
+thematrix = as.matrix(dtmatrixes)
+rm(dtmatrix,dtmatrixes,finalcorpus)
+bigdata = as.data.frame(cbind(overall = averagestars1$overall, thematrix))
+logmodel = lm(overall~., data=bigdata)
+rm(bigdata)
+coef = coef(logmodel)[-1]
+rm(logmodel)
+positives = coef[coef>0]
+highpositives = as.data.frame(sort(positives,decreasing=T)[1:30])
+highpositives$words = rownames(highpositives)
+highpositives
+```
+```{r}
+negatives = coef[coef<0]
+highnegatives = as.data.frame(sort(negatives,decreasing=T)[1:30])
+highnegatives$words = rownames(highnegatives)
+highnegatives
+
+```
+```{r}
+wordcloud(words = highpositives[,2], freq = abs(highpositives[,1]))
+```
+```{r}
+wordcloud(words = highnegatives[,2], freq = abs(highnegatives[,1]))
+
+```
+```{r}
+helpfuldata = reviews %>% separate(helpful, c("helpful", "unhelpful"), ",")
+helpfuldata$helpful = str_remove(helpfuldata$helpful, "\\[")
+helpfuldata$unhelpful = str_remove(helpfuldata$unhelpful, "\\]")
+helpfuldata$sentiment = get_sentiment(helpfuldata$reviewText)
+helpfuldata$wordcount = str_count(helpfuldata$reviewText, "\\w+")
+helpfuldata$helpfulbinary = as.numeric(helpfuldata$helpful > 0)
+seperaterows = sample(1:nrow(helpfuldata),0.8*nrow(helpfuldata))
+training = helpfuldata[seperaterows,]
+testing = helpfuldata[-seperaterows,]
+logfit = glm(helpfulbinary ~ abs(sentiment) + wordcount, training, family = binomial)
+
+```
+```{r}
+summary(logfit)
+
+```
+```{r}
+testz = mean(testing$helpfulbinary == as.numeric(predict(logfit, newdata = testing, type =
+"response") > 0.4))
+testz
+
+```
+```{r}
+print("my model is about 9% better")
+```
+```{r}
+logfit1 = glm(helpfulbinary ~ abs(sentiment) + abs(sentiment)/wordcount + overall + wordcount, training, family = binomial)
+summary(logfit1)
+
+```
+```{r}
+testzeros1 = mean(testing$helpfulbinary == as.numeric(predict(logfit1, newdata = testing, type =
+"response") > 0.3))
+testzeros1
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
